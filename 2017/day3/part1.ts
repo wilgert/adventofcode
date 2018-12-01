@@ -1,9 +1,4 @@
-enum Direction{
-  Right,
-  Up,
-  Left,
-  Down
-}
+import {Direction} from './direction.enum';
 
 export const part1 = (input: number) =>{
   let spiral = [];
