@@ -1,6 +1,5 @@
 import {Md5} from "ts-md5";
 
-
 const testInput1 = 'abcdef';
 const testResult1 = '609043';
 const testInput2 = 'pqrstuv';
@@ -12,7 +11,7 @@ let number = 0;
 
 while(!md5.startsWith('000000')) {
     number++;
-    md5 = Md5.hashAsciiStr(`${realInput}${number}`);
+    md5 = Md5.hashAsciiStr(`${realInput}${number}`).toString();
 }
 
 md5;
