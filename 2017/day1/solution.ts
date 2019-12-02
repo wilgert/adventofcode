@@ -1,4 +1,4 @@
-import {readFile} from '../../2018/common/readFile';
+import {readFile} from '../../common/readFile';
 
 const input = readFile('day1/input');
 

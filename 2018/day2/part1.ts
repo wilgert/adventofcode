@@ -1,10 +1,10 @@
-import {readFile} from '../common/readFile';
+import {readFile} from '../../common/readFile';
 import * as path from 'path';
 
 
 const input = readFile(path.join(__dirname, 'input.txt')).split('\n');
 
-function hasCharacterMupliple(str: string, count: number) {
+function hasCharacterMupliple(str: string, count: number): boolean {
     const letters = str.split('');
 
     return letters.some((value) => (str.match(new RegExp(value, 'g')) || []).length == count);

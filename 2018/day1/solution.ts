@@ -1,5 +1,5 @@
-import {readFile} from '../common/readFile';
 import * as path from 'path';
+import {readFile} from "../../common/readFile";
 
 
 const input = readFile(path.join(__dirname, 'input.txt'));
@@ -20,9 +20,10 @@ export const device = (input) => {
         visited.add(current);
         current = current + instructions[i];
         i++;
-        if(i == length) i = 0;
+        if(i == length) {
+            i = 0;
+        }
     }
-
     return current;
 };
 

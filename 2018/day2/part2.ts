@@ -1,4 +1,4 @@
-import {readFile} from '../common/readFile';
+import {readFile} from '../../common/readFile';
 import * as path from 'path';
 
 const input = readFile(path.join(__dirname, 'input.txt')).split('\n');
@@ -19,7 +19,6 @@ export const commonCharacters = (input: string[]): string => {
     });
 
     return first.split('').filter(f => second.includes(f)).join('');
-    // return '';
 };
 
 commonCharacters(input); /* ? */
