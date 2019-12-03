@@ -5,18 +5,18 @@ let input = readFile(path.join(__dirname, 'input.txt'));
 let testInput = readFile(path.join(__dirname, 'testInput.txt'));
 
 
+const opcodeLengthMap = {
+    1: 4,
+    2: 4,
+    99: 1
+};
+
 export const step = (index: number, state: number[]) => {
     let operant1 = state[state[index+1]];
     let operant2  = state[state[index+2]];
     state[state[index+3]] = state[index] === 1 ? operant1 + operant2 : operant1 * operant2;
 
     return state;
-};
-
-const opcodeLengthMap = {
-    1: 4,
-    2: 4,
-    99: 1
 };
 
 export const agc = (memory: number[]) => {

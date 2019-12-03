@@ -1,5 +1,4 @@
 import {agc, step} from "./solution";
-// file.only
 describe('AGC', () => {
     it('single step', () => {
         expect(step(0, [1, 0, 0, 0])).toEqual([2, 0, 0, 0]);
