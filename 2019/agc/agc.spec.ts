@@ -1,4 +1,5 @@
-import {agc, step} from "./solution";
+import {agc, step} from "./agc";
+
 describe('AGC', () => {
     it('single step', () => {
         expect(step(0, [1, 0, 0, 0])).toEqual([2, 0, 0, 0]);

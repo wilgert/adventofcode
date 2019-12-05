@@ -1,5 +1,4 @@
 import { manhattenDistance, parseInstruction, part1, wireToGrid} from "./solution";
-// file.only
 describe('Manhatten distance again', () => {
     it('manhattenDistance', () => {
         expect(manhattenDistance({x:0, y:0}, {x: 3, y:3})).toEqual(6);
