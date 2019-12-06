@@ -12,9 +12,7 @@ function part2(initialMemory) {
     for (let noun = 0; noun < 99; noun++) {
         for (let verb = 0; verb < 99; verb++) {
             const memory = [...initialMemory];
-            memory[1] = noun;
-            memory[2] = verb;
-            const result = agc(memory);
+            const result = agc(memory, noun, verb);
             if (result[0] === 19690720) {
                 return 100 * noun + verb;
             }

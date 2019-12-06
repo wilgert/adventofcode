@@ -18,7 +18,7 @@ describe('part1', ()=>{
     });
 
     it('test5', ()=>{
-        // expect(part1('R2, R2, R2, R2')).toEqual(0);
+        // expect(createGraph('R2, R2, R2, R2')).toEqual(0);
         expect(part1('L2, L2, L2, L2')).toEqual(0);
     });
 });
