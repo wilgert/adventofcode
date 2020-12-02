@@ -23,9 +23,11 @@ function isValidPart1({ min, max, letter, password }: PasswordAndPolicy) {
 }
 
 function isValidPart2({ min, max, letter, password }: PasswordAndPolicy) {
+  let firstCorrect = password[min - 1] === letter;
+  let secondCorrect = password[max - 1] === letter;
   return (
-    (password[min - 1] === letter && password[max - 1] !== letter) ||
-    (password[min - 1] !== letter && password[max - 1] === letter)
+    (firstCorrect && !secondCorrect) ||
+    (!firstCorrect && secondCorrect)
   );
 }
 
