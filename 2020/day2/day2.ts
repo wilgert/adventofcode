@@ -4,30 +4,37 @@ const prepareInput = (rawInput: string) => rawInput
 
 const input = prepareInput(readFile(__dirname + '/input.txt'))
 
-function isValidPart1({min, max, letter, password}) {
+interface PasswordAndPolicy {
+  min: number,
+  max: number,
+  letter: string,
+  password: string
+}
+
+const goB = (input): number => {
+  return createPasswordsAndPolicies(input)
+    .filter((passwordAndPolicy) => isValidPart2(passwordAndPolicy)).length;
+}
+
+function isValidPart1({min, max, letter, password}: PasswordAndPolicy) {
   let length = password.split('').filter(l => l === letter).length;
   return length >= min && length <= max;
 }
 
-function isValidPart2({min, max, letter, password}) {
+function isValidPart2({min, max, letter, password}: PasswordAndPolicy) {
   return (password[min-1] === letter && password[max-1] !== letter) || (password[min-1] !== letter && password[max-1] === letter)
 }
 
-function createPasswordsAndPolicies(input) {
+function createPasswordsAndPolicies(input): PasswordAndPolicy[] {
   return input.split('\n')
+    .filter(line => line)
     .map(line => line.match(/(\d{1,2})-(\d{1,2}) ([a-z]): (.*)/))
-    .filter(match => match)
-    .map((match) => ({min: parseInt(match[1]), max: parseInt(match[2]), letter: match[3], password: match[4]}));
+    .map(([, min, max, letter, password]) => ({min: parseInt(min), max: parseInt(max), letter, password}));
 }
 
-const goA = (input) => {
-  return createPasswordsAndPolicies(input) // ?
-    .reduce((total, passwordAndPolicy) => isValidPart1(passwordAndPolicy) ? ++total : total, 0);
-}
-
-const goB = (input) => {
-  return createPasswordsAndPolicies(input) // ?
-    .reduce((total, passwordAndPolicy) => isValidPart2(passwordAndPolicy) ? ++total : total, 0);
+const goA = (input): number => {
+  return createPasswordsAndPolicies(input)
+    .filter((passwordAndPolicy) => isValidPart1(passwordAndPolicy)).length;
 }
 
 /* Tests */
