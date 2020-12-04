@@ -1,4 +1,4 @@
-import { readFile } from "../../common/readFile";
+import {readFile} from "../../common/readFile";
 
 const prepareInput = (rawInput: string) =>
   rawInput.split("\n").map((row) => row.split(""));
@@ -11,10 +11,9 @@ function countTrees(
 ) {
   let trees = 0;
   for (let i = 0; i < map.length; i += down ) {
-    let row = map[i];
-    let treeIndex = (i/down * right) % row.length;
-    const tree = row[treeIndex];
-    if (tree === "#") {
+    const row = map[i];
+    const treeIndex = (i/down * right) % row.length;
+    if (row[treeIndex] === "#") {
       trees++;
     }
   }
@@ -63,5 +62,5 @@ const resultA = goA(input);
 const resultB = goB(input);
 console.timeEnd("Time");
 
-// console.log("Solution to part 1:", resultA);
+console.log("Solution to part 1:", resultA);
 console.log("Solution to part 2:", resultB);
