@@ -45,14 +45,14 @@ const validators: { [key: string]: (value: string) => boolean } = {
   pid: (value) => /^[0-9]{9}$/.test(value),
 };
 
-function reducer(
+function validateFields(
   passports,
-  validateField: (requiredField, passport) => boolean
+  validatorFn: (requiredField, passport) => boolean
 ) {
   return passports.reduce(
     (validPassports: number, passport) =>
       requiredFields.every((requiredField) =>
-        validateField(requiredField, passport)
+        validatorFn(requiredField, passport)
       )
         ? validPassports + 1
         : validPassports,
@@ -61,14 +61,14 @@ function reducer(
 }
 
 const goA = (passports): number => {
-  return reducer(
+  return validateFields(
     passports,
     (requiredField, passport) => passport[requiredField] !== undefined
   );
 };
 
 const goB = (passports) => {
-  return reducer(passports, (requiredField, passport) => {
+  return validateFields(passports, (requiredField, passport) => {
     const value = passport[requiredField];
     const validator = validators[requiredField];
     return value !== undefined && validator(value);
