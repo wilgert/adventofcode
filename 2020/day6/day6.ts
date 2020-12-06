@@ -9,7 +9,6 @@ const testInput = prepareInput(readFile(__dirname + "/test-input.txt"));
 export const goA = (groups: string[]): number => {
   return groups
     .map((group) => group.split(/\n/).filter((member) => member))
-    .filter((group) => group.length)
     .map((group) => new Set(group.flatMap((member) => member.split(""))))
     .reduce((total, group) => total + group.size, 0);
 };
@@ -17,9 +16,8 @@ export const goA = (groups: string[]): number => {
 export const goB = (groups: string[]): number => {
   return groups
     .map((group) => group.split(/\n/).filter((member) => member))
-    .filter((group) => group.length)
     .reduce(
-      (groupTotal, group, index, array) =>
+      (groupTotal, group) =>
         groupTotal +
         group.reduce((acc, member) => {
           return new Set([
