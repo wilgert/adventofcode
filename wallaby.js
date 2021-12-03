@@ -8,7 +8,7 @@ module.exports = function (w) {
     ],
 
     tests: [
-      '/2018/**/*.spec.ts'
+      '/2021/**/*.spec.ts'
     ],
 
     env: {type: 'node'},

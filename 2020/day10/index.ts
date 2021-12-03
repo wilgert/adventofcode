@@ -30,7 +30,7 @@ function countDifferences(adapters: number[]) {
 
 function countPossibleCombination(lines: number[]): number {
   const diffs = countDifferences(lines); // ?
-
+  return 0;
 }
 
 export const goA = (lines: number[]): number => {
