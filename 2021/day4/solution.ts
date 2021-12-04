@@ -104,7 +104,7 @@ function getLastWinning(draws: number[], boards: number[][][]) {
       }
     }
 
-    winners.forEach(w => boards.splice(w, 1));
+    winners.reverse().forEach(w => boards.splice(w, 1));
 
     if (boards.length === 0) {
       break;
