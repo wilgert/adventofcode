@@ -48,49 +48,35 @@ function part1(input): number {
   return grid.flat().filter(n => n > 1).length; // ?
 }
 
+function applyToGrid(grid: any[], y: number, x: number) {
+  if (grid[y] === undefined) {
+    grid[y] = [];
+  }
+  if (grid[y][x] === undefined) {
+    grid[y][x] = 0;
+  }
+  grid[y][x]++;
+}
+
 function part2(input): number {
   const processed = parseInput(input);
   const grid = [];
   for (const {x1, y1, x2, y2} of processed) {
     if(x1 < x2 && y1 < y2) { // 1,1 -> 3,3
       for(let x = x1, y = y1; y <= y2; x++, y++) {
-        if(grid[y] === undefined) {
-          grid[y] = [];
-        }
-        if(grid[y][x] === undefined){
-          grid[y][x] = 0;
-        }
-        grid[y][x]++;
+        applyToGrid(grid, y, x);
       }
     } else if(x1 > x2 && y1 > y2) { // 3,3 -> 1,1
       for(let x = x1, y = y1; x >= x2; x--, y--) {
-        if(grid[y] === undefined) {
-          grid[y] = [];
-        }
-        if(grid[y][x] === undefined){
-          grid[y][x] = 0;
-        }
-        grid[y][x]++;
+        applyToGrid(grid, y, x);
       }
     } else if(x1 > x2 && y1 < y2) { // 2,1 -> 1,2
       for(let x = x1, y = y1; x >= x2; x--, y++) {
-        if(grid[y] === undefined) {
-          grid[y] = [];
-        }
-        if(grid[y][x] === undefined){
-          grid[y][x] = 0;
-        }
-        grid[y][x]++;
+        applyToGrid(grid, y, x);
       }
     } else if(x1 < x2 && y1 > y2) { // 1,2 => 2,1
       for(let x = x1, y = y1; x <= x2; x++, y--) {
-        if(grid[y] === undefined) {
-          grid[y] = [];
-        }
-        if(grid[y][x] === undefined){
-          grid[y][x] = 0;
-        }
-        grid[y][x]++;
+        applyToGrid(grid, y, x);
       }
     } else {
       for (let y = Math.min(y1,y2); y <= Math.max(y2,y1); y++) {
