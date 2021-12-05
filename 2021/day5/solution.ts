@@ -78,17 +78,13 @@ function part2(input): number {
       for(let x = x1, y = y1; x <= x2; x++, y--) {
         applyToGrid(grid, y, x);
       }
-    } else {
-      for (let y = Math.min(y1,y2); y <= Math.max(y2,y1); y++) {
-        if(grid[y] === undefined) {
-          grid[y] = [];
-        }
-        for (let x = Math.min(x1,x2); x <= Math.max(x2,x1); x++) {
-          if(grid[y][x] === undefined){
-            grid[y][x] = 0;
-          }
-          grid[y][x]++;
-        }
+    } else if(x1 === x2) { // 1,2 -> 1,5
+      for (let y = Math.min(y1, y2); y <= Math.max(y2, y1); y++) {
+        applyToGrid(grid, y, x1);
+      }
+    } else if(y1 === y2) { // 1, 4 -> 5, 4 | 5,4 -> 1,4
+      for (let x = Math.min(x1,x2); x <= Math.max(x2,x1); x++) {
+        applyToGrid(grid, y1, x);
       }
     }
   }
