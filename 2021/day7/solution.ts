@@ -10,29 +10,23 @@ function processInput(input: string): number[] {
 const input = processInput(readFile(__dirname + "/input.txt"));
 const example = processInput(`16,1,2,0,4,2,7,1,2,14`);
 
-function getFuelCost(position: number, p: number) {
-  return Math.abs(position - p);
+function getFuelCost(steps) {
+  return steps;
 }
 
-function getFuelCost2(position: any, p) {
-  const steps = Math.abs(position - p);
-  let cost = 0;
-  for (let i = 1; i <= steps; i++) {
-    cost += i;
-  }
-
-  return cost;
+function getFuelCost2(steps: number) {
+  return steps * (steps + 1) / 2;
 }
 
 function getOptimalPosition(
   uniquePositions: number[],
   input,
-  fuelCost: (position: number, p: number) => number
+  fuelCost: (steps: number) => number
 ) {
   return uniquePositions.reduce((result, position) => {
     return Math.min(
       result,
-      input.reduce((t, p) => t + fuelCost(position, p), 0)
+      input.reduce((t, p) => t + fuelCost(Math.abs(position - p)), 0)
     );
   }, Infinity);
 }
