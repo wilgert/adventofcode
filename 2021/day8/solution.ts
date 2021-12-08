@@ -1,10 +1,21 @@
 import { readFile } from "../../common/readFile";
 
+function sortSignals(signals: string) {
+  return signals
+    .split(" ")
+    .map((s) => s.split("").sort().join(""))
+    .join(" ");
+}
+
 function processInput(input: string): string[][] {
   return input
     .split("\n")
     .filter((l) => l)
-    .map((line) => line.split(" | "));
+    .map((line) => line.split(" | "))
+    .map(([displayIn, displayOut]) => [
+      sortSignals(displayIn),
+      sortSignals(displayOut),
+    ]);
 }
 
 const input = processInput(readFile(__dirname + "/input.txt"));
@@ -43,16 +54,16 @@ function part1(input: string[][]): number {
   );
 }
 
-function objectFlip(obj: Record<string, string>) {
+function objectFlipAndSort(obj: Record<string, string>) {
   return Object.entries(obj).reduce((ret, entry) => {
     const [key, value] = entry;
-    ret[value.split("").sort().join("")] = key;
+    ret[value] = key;
     return ret;
   }, {});
 }
 
-function hasAllSegments(segments: string, i: string) {
-  return segments.split("").every((c) => i.includes(c));
+function hasAllSegments(haystack: string, needle: string) {
+  return haystack.split("").every((c) => needle.includes(c));
 }
 
 function findSignal(inputs: string[], predicate: (i) => boolean) {
@@ -71,24 +82,21 @@ function findDigitMap(displayIn: string) {
     inputs,
     (i) => i.length === 5 && hasAllSegments(digitMap["1"], i)
   );
-  digitMap["0"] = findSignal(
-    inputs,
-    (i) =>
-      i.length === 6 &&
-      hasAllSegments(digitMap["1"], i) &&
-      !hasAllSegments(digitMap["3"], i)
-  );
   digitMap["9"] = findSignal(
     inputs,
-    (i) =>
-      i.length === 6 &&
-      hasAllSegments(digitMap["1"], i) &&
-      hasAllSegments(digitMap["3"], i)
+    (i) => i.length === 6 && hasAllSegments(digitMap["3"], i)
   );
-  digitMap["5"] = findSignal(inputs, (i) => i.length === 5 && hasAllSegments(i, digitMap['9']));
+  digitMap["0"] = findSignal(
+    inputs,
+    (i) => i.length === 6 && hasAllSegments(digitMap["1"], i)
+  );
+  digitMap["5"] = findSignal(
+    inputs,
+    (i) => i.length === 5 && hasAllSegments(i, digitMap["9"])
+  );
   digitMap["6"] = findSignal(inputs, (i) => i.length === 6);
   digitMap["2"] = inputs[0];
-  return objectFlip(digitMap);
+  return objectFlipAndSort(digitMap);
 }
 
 function part2(input): number {
@@ -98,10 +106,7 @@ function part2(input): number {
     let number = parseInt(
       displayOut
         .split(" ")
-        .map((s) => {
-          let sorted = s.split("").sort().join("");
-          return digitMap[sorted];
-        })
+        .map((s) => digitMap[s])
         .join(""),
       10
     );
