@@ -54,7 +54,7 @@ function part1(input: string[][]): number {
   );
 }
 
-function objectFlipAndSort(obj: Record<string, string>) {
+function objectFlip(obj: Record<string, string>) {
   return Object.entries(obj).reduce((ret, entry) => {
     const [key, value] = entry;
     ret[value] = key;
@@ -96,7 +96,7 @@ function findDigitMap(displayIn: string) {
   );
   digitMap["6"] = findSignal(inputs, (i) => i.length === 6);
   digitMap["2"] = inputs[0];
-  return objectFlipAndSort(digitMap);
+  return objectFlip(digitMap);
 }
 
 function part2(input): number {
