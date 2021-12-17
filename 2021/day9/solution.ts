@@ -74,6 +74,8 @@ function findBasinSize(input: number[][], i: number, j: number, basinMap?: numbe
       findBasinSize(input, i, j+1, basinMap);
     }
   }
+  console.log(basinMap.map(l => l.join('')).join('\n')));
+
   return basinMap.flat().filter(x => x).length;
 }
 
@@ -95,4 +97,4 @@ function part2(input: number[][]): number {
 // part1(example); // ?
 // part1(input); // ?
 part2(example); // ?
-part2(input); // ?
+// part2(input); // ?
