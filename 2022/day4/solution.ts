@@ -36,10 +36,6 @@ function aOverlapsB(a, b): boolean {
   return range(a.start, a.end, 1).some(id => id >= b.start && id <= b.end);
 }
 
-function anyOverlaps(a, b): boolean {
-  return aOverlapsB(a, b) || aOverlapsB(a, b);
-}
-
 function part1(input) {
   return input.reduce((count, [a, b]) => {
     if (anyContains(a, b)) {
@@ -52,7 +48,7 @@ function part1(input) {
 
 function part2(input) {
   return input.reduce((count, [a, b]) => {
-    if (anyOverlaps(a, b)) {
+    if (aOverlapsB(a, b)) {
       count++;
     }
 
