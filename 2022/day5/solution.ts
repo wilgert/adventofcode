@@ -1,4 +1,4 @@
-import {readFile} from "../../common/readFile";
+import { readFile } from "../../common/readFile";
 
 const input = readFile(__dirname + "/input.txt");
 const example = `    [D]    
@@ -52,13 +52,9 @@ function processInput(input: string): { stacks: string[][]; moves: Move[] } {
   return { stacks: processStacks(stacks), moves: processMoves(moves) };
 }
 
-function part1(input) {
-  const {stacks, moves} = processInput(input);
-  moves.forEach(({ count, from, to }) => {
-    for (let i = 0; i < count; i++) {
-      stacks[to - 1].unshift(stacks[from - 1].shift());
-    }
-  });
+function runCrane(input, crane) {
+  const { stacks, moves } = processInput(input);
+  moves.forEach(crane(stacks));
 
   return stacks
     .map((stack) => stack[0])
@@ -66,18 +62,22 @@ function part1(input) {
     .replace(/\[|\]/gm, "");
 }
 
+function part1(input) {
+  const crane = (stacks) => ({ count, from, to }) => {
+    for (let i = 0; i < count; i++) {
+      stacks[to - 1].unshift(stacks[from - 1].shift());
+    }
+  };
+  return runCrane(input, crane);
+}
+
 function part2(input) {
-  const {stacks, moves} = processInput(input);
-
-  moves.forEach(({ count, from, to }) => {
-    const removed = stacks[from-1].splice(0, count);
+  const crane = (stacks) => ({ count, from, to }) => {
+    const removed = stacks[from - 1].splice(0, count);
     stacks[to - 1].unshift(...removed);
-  });
+  };
 
-  return stacks
-    .map((stack) => stack[0])
-    .join("")
-    .replace(/\[|\]/gm, "");
+  return runCrane(input, crane);
 }
 
 part1(example); // ?
