@@ -1,4 +1,4 @@
-import { readFile } from "../../common/readFile";
+import {readFile} from "../../common/readFile";
 
 const input = readFile(__dirname + "/input.txt");
 const example = `    [D]    
@@ -49,8 +49,7 @@ function processMoves(moves: string): Move[] {
 function processInput(input: string): { stacks: string[][]; moves: Move[] } {
   const [stacks, moves] = input.split("\n\n");
 
-  let stacks1 = processStacks(stacks); // ?
-  return { stacks: stacks1, moves: processMoves(moves) };
+  return { stacks: processStacks(stacks), moves: processMoves(moves) };
 }
 
 function part1(input) {
