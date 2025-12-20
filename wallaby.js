@@ -2,13 +2,14 @@ module.exports = function (w) {
 
   return {
     files: [
-      {pattern: '/**/*.ts', load: false},
+      {pattern: '/2023/**/*.ts', load: false},
+      {pattern: '/common/**/*.ts', load: false},
       {pattern: '/**/*.txt', load: false},
       '!/**/*.spec.ts'
     ],
 
     tests: [
-      '/2021/**/*.spec.ts'
+      '/2023/**/*.spec.ts'
     ],
 
     env: {type: 'node'},
